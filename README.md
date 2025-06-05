@@ -17,3 +17,7 @@ This is a list of things I want to further explore with such a simulation
 <center>
 <img src="./dune.png"> 
 </center>
+
+## Live Demo
+
+https://dune-sand.netlify.app/

@@ -27,10 +27,12 @@
 	}
 
 	.header {
-		margin-top: 2rem;
+		margin-top: 2em;
+		font-size: 12px;
 	}
+
 	.sandbox-container {
-		margin-top: 100px;
+		margin-top: 30px;
 		width: 100%;
 		display: flex;
 		justify-content: center;
