@@ -1,0 +1,15 @@
+:root {
+	--color-bg: #3576ae;
+	--color-fg: #e9cb8e;
+	--color-fg-muted: #e9cb8e36;
+	--color-fg-2: #a5663a;
+	--color-fg-3: #66280c;
+	--box-size: calc(70vmin);
+
+	--font-family: 'CaskaydiaCove Nerd Font';
+}
+
+body {
+	background-color: var(--color-bg);
+	color: var(--color-fg);
+}
