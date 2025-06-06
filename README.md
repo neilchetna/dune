@@ -7,10 +7,10 @@ A micro-project I built to better understand **cellular automata** and experimen
 This is a list of things I want to further explore with such a simulation
 
 - [ ] A working sand hourglass with a custom timer
-- [ ] Game of life automata
-- [ ] Fix gravity, since currently everything just falls at the same time
-- [ ] Explore more simulations like fire propagation or ant colony
+- [ ] **Conway's Game of Life** automaton
+- [ ] Explore more simulations like **fire propagation** or **ant colony behavior**
 - [ ] Ride Shai-Hulud.
+- [x] Fix gravity, since currently everything just falls at the same time
 
 ## Screenshot
 

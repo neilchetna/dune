@@ -1,55 +1,52 @@
 <script lang="ts">
-	const { size = 40 }: { size?: number } = $props();
+	import { onMount } from 'svelte';
+	const { size = 60, isMouseDown }: { size?: number, isMouseDown: boolean } = $props();
 	const blocks: number[][] = $state(new Array(size).fill(new Array(size).fill(0)));
-	let currentRow: number = $state(0);
+	let currentRow: number = $state(size - 1);
 
 	function onBlockClick(i: number, j: number): void {
 		blocks[i][j] = 1;
 	}
 
-	function falling(): void {
-		if (currentRow == size) {
-			currentRow = 0;
+	function loop(): void {
+		if (currentRow < 0) {
+			currentRow = size - 1;
 		}
-		const i = currentRow;
+		let i = currentRow;
+		const multiplyer = currentRow > 1 ? currentRow - 4 : 1;
 
-		for (let j = 0; j < blocks.length; j++) {
-			if (i === blocks.length - 1) {
-				break;
-			}
+		while (i >= 0 && i >= multiplyer) {
+			for (let j = 0; j < blocks.length; j++) {
+				if (!blocks[i][j] || i === size - 1) {
+					continue;
+				}
 
-			if (!blocks[i][j]) {
-				continue;
-			}
+				if (blocks[i][j] && !blocks[i + 1][j]) {
+					blocks[i][j] = 0;
+					blocks[i + 1][j] = 1;
+				}
 
-			if (blocks[i][j] && !blocks[i + 1][j]) {
-				blocks[i][j] = 0;
-				blocks[i + 1][j] = 1;
-			}
+				// Check Left
+				if (blocks[i][j] && blocks[i + 1][j] && j > 0 && !blocks[i + 1][j - 1]) {
+					blocks[i][j] = 0;
+					blocks[i + 1][j - 1] = 1;
+				}
 
-			// Check Left
-			if (blocks[i][j] && blocks[i + 1][j] && j > 0 && !blocks[i + 1][j - 1]) {
-				blocks[i][j] = 0;
-				blocks[i + 1][j - 1] = 1;
+				// Check Right
+				if (blocks[i][j] && blocks[i + 1][j] && j < blocks.length - 1 && !blocks[i + 1][j + 1]) {
+					blocks[i][j] = 0;
+					blocks[i + 1][j + 1] = 1;
+				}
 			}
-
-			// Check Right
-			if (blocks[i][j] && blocks[i + 1][j] && j < blocks.length - 1 && !blocks[i + 1][j + 1]) {
-				blocks[i][j] = 0;
-				blocks[i + 1][j + 1] = 1;
-			}
+			i -= 1
 		}
-		currentRow += 1;
+
+		currentRow -= 4;
+		requestAnimationFrame(loop);
 	}
 
-	$effect(() => {
-		const interval = setInterval(() => {
-			falling();
-		}, 30);
-
-		return () => {
-			clearInterval(interval);
-		};
+	onMount(() => {
+		loop();
 	});
 </script>
 
@@ -60,7 +57,7 @@
 				<button
 					aria-label="sand-button"
 					class:filled={hBlock}
-					onmouseenter={() => onBlockClick(i, j)}
+					onmouseenter={() => isMouseDown && onBlockClick(i, j)}
 					class="block"
 				></button>
 			{/each}
@@ -86,7 +83,6 @@
 	.block {
 		all: unset;
 		cursor: pointer;
-		border: 1px solid var(--color-fg-muted);
 	}
 
 	.filled {

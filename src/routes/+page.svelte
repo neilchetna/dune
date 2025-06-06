@@ -1,6 +1,16 @@
 <script lang="ts">
 	import '../app.css';
 	import Sandbox from './Sandbox.svelte';
+
+	let isMouseDown: boolean = $state(false)
+
+	function onmousedown() {
+		isMouseDown = true;
+	}
+
+	function onmouseup() {
+		isMouseDown = false;
+	}
 </script>
 
 <pre class="header">
@@ -14,8 +24,8 @@
 ░░░░░░░░░░     ░░░░░░░░ ░░░░ ░░░░░  ░░░░░░  
 </pre>
 <h1>Sand Simulation 󱦟</h1>
-<div class="sandbox-container">
-	<Sandbox />
+<div {onmousedown} {onmouseup} tabindex="0" role="grid" class="sandbox-container">
+	<Sandbox {isMouseDown} />
 </div>
 
 <style>
