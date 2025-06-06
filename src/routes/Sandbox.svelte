@@ -1,8 +1,18 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	const { size = 60, isMouseDown }: { size?: number, isMouseDown: boolean } = $props();
+	const { size = 60 }: { size?: number } = $props();
 	const blocks: number[][] = $state(new Array(size).fill(new Array(size).fill(0)));
 	let currentRow: number = $state(size - 1);
+	let isDrawing: boolean = $state(false);
+
+	function handleIsDrawing() {
+		console.log('captured');
+		isDrawing = true;
+	}
+
+	function handleIsNotDrawing() {
+		isDrawing = false;
+	}
 
 	function onBlockClick(i: number, j: number): void {
 		blocks[i][j] = 1;
@@ -38,7 +48,7 @@
 					blocks[i + 1][j + 1] = 1;
 				}
 			}
-			i -= 1
+			i -= 1;
 		}
 
 		currentRow -= 4;
@@ -51,13 +61,20 @@
 </script>
 
 <section class="sandbox-root">
-	<div class="sandbox" style:--size={size}>
+	<div
+		tabindex="0"
+		role="grid"
+		onmousedown={handleIsDrawing}
+		onmouseup={handleIsNotDrawing}
+		class="sandbox"
+		style:--size={size}
+	>
 		{#each blocks as vBlock, i}
 			{#each vBlock as hBlock, j (`${i}-${j}`)}
 				<button
 					aria-label="sand-button"
 					class:filled={hBlock}
-					onmouseenter={() => isMouseDown && onBlockClick(i, j)}
+					onmouseenter={() => isDrawing && onBlockClick(i, j)}
 					class="block"
 				></button>
 			{/each}
@@ -83,6 +100,7 @@
 	.block {
 		all: unset;
 		cursor: pointer;
+		user-select: none;
 	}
 
 	.filled {
