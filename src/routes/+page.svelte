@@ -13,8 +13,9 @@
  ██████████   ░░████████ ████ █████░░██████ 
 ░░░░░░░░░░     ░░░░░░░░ ░░░░ ░░░░░  ░░░░░░  
 </pre>
-<h1>Sand Simulation 󱦟</h1>
+<h1>Sand Simulation</h1>
 <div tabindex="0" role="grid" class="sandbox-container">
+	<p>Drag you mouse across the canvas to add sand</p>
 	<Sandbox />
 </div>
 
@@ -23,7 +24,6 @@
 	.header {
 		width: fit-content;
 		margin: 0 auto;
-		font-family: var(--font-family, 'apple sans');
 	}
 
 	.header {
@@ -35,6 +35,7 @@
 		margin-top: 30px;
 		width: 100%;
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 	}

@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	const { size = 60 }: { size?: number } = $props();
+	const { size = 100 }: { size?: number } = $props();
 	const blocks: number[][] = $state(new Array(size).fill(new Array(size).fill(0)));
 	let currentRow: number = $state(size - 1);
 	let isDrawing: boolean = $state(false);
 
 	function handleIsDrawing() {
-		console.log('captured');
 		isDrawing = true;
 	}
 
@@ -23,9 +22,10 @@
 			currentRow = size - 1;
 		}
 		let i = currentRow;
-		const multiplyer = currentRow > 1 ? currentRow - 4 : 1;
+		const multiplyer = Math.floor(size * 0.4);
+		const range = currentRow > multiplyer ? currentRow - multiplyer : 0;
 
-		while (i >= 0 && i >= multiplyer) {
+		while (i >= 0 && i >= range) {
 			for (let j = 0; j < blocks.length; j++) {
 				if (!blocks[i][j] || i === size - 1) {
 					continue;
@@ -51,7 +51,7 @@
 			i -= 1;
 		}
 
-		currentRow -= 4;
+		currentRow -= multiplyer;
 		requestAnimationFrame(loop);
 	}
 
