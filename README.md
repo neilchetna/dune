@@ -2,6 +2,10 @@
 
 A micro-project I built to better understand **cellular automata** and experiment with basic **graph algorithms** (although the core logic for a sand simulation is fairly straightforward).
 
+## Website
+
+https://dune-sand.netlify.app/
+
 ## Todo List
 
 This is a list of things I want to further explore with such a simulation
@@ -18,6 +22,3 @@ This is a list of things I want to further explore with such a simulation
 <img src="./dune.png"> 
 </center>
 
-## Live Demo
-
-https://dune-sand.netlify.app/
