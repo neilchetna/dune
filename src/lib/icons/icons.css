@@ -1,0 +1,16 @@
+/*
+	As recommended by the svelte docs using the icons
+	with css classes. https://svelte.dev/docs/kit/icons/ 
+*/
+
+.pause {
+	background-image: url(./pause.svg);
+}
+
+.play {
+	background-image: url(./play.svg);
+}
+
+.arrow-left {
+	background-image: url(./arrow-left.svg);
+}

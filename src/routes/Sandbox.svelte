@@ -22,8 +22,8 @@
 			currentRow = size - 1;
 		}
 		let i = currentRow;
-		const multiplyer = Math.floor(size * 0.4);
-		const range = currentRow > multiplyer ? currentRow - multiplyer : 0;
+		const multiplier = Math.floor(size * 0.4);
+		const range = currentRow > multiplier ? currentRow - multiplier : 0;
 
 		while (i >= 0 && i >= range) {
 			for (let j = 0; j < blocks.length; j++) {
@@ -51,7 +51,7 @@
 			i -= 1;
 		}
 
-		currentRow -= multiplyer;
+		currentRow -= multiplier;
 		requestAnimationFrame(loop);
 	}
 
@@ -66,10 +66,11 @@
 		role="grid"
 		onmousedown={handleIsDrawing}
 		onmouseup={handleIsNotDrawing}
+		onmouseleave={handleIsNotDrawing}
 		class="sandbox"
 		style:--size={size}
 	>
-		{#each blocks as vBlock, i}
+		{#each blocks as vBlock, i (i)}
 			{#each vBlock as hBlock, j (`${i}-${j}`)}
 				<button
 					aria-label="sand-button"

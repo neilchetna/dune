@@ -1,16 +1,38 @@
+@import url('./lib/icons/icons.css');
+
 :root {
 	--color-bg: #3576ae;
 	--color-fg: #e9cb8e;
+	--color-fg-alt: #d6bb85;
 	--color-fg-muted: #e9cb8e36;
 	--color-fg-2: #a5663a;
 	--color-fg-3: #66280c;
+	--color-fg-2-muted: #a5673a41;
 	--box-size: calc(70vmin);
 
 	font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
+	margin: 0;
 	background-color: var(--color-bg);
 	color: var(--color-fg);
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewbox='0 0 8 8'%3e%3cg fill='%239c92ac' fill-opacity='0.2'%3e%3cpath fill-rule='evenodd' d='m0 0h4v4h0v0zm4 4h4v4h4v4z'/%3e%3c/g%3e%3c/svg%3e");
+}
+
+a {
+	text-decoration: underline;
+	color: var(--color-fg);
+	font-weight: 600;
+}
+
+a.external::after {
+	content: '';
+	display: inline-block;
+	background-image: url('/static/external.icon.svg');
+	background-size: contain;
+	height: 1em;
+	width: 1em;
+	vertical-align: middle;
+	margin: 0 0 2px 2px;
 }
