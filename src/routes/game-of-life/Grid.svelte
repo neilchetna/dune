@@ -3,6 +3,7 @@
 
 	const { size = 40, isActive = false }: { size: number; isActive: boolean } = $props();
 	const grid: number[][] = $state(new Array(size).fill(new Array(size).fill(0)));
+	const fossilGrid: number[][] = $state(new Array(size).fill(new Array(size).fill(0)));
 
 	const loop = () => {
 		if (!isActive) {
@@ -48,6 +49,7 @@
 
 				if (!prevGrid[i][j] && count == 3) {
 					grid[i][j] = 1;
+					fossilGrid[i][j] = 1;
 					continue;
 				}
 
@@ -75,6 +77,7 @@
 			<button
 				aria-label="button to toggle state of the cell ({i}, {j})"
 				class:filled={cell}
+				class:fossil={fossilGrid[i][j] && !cell}
 				class="cell"
 				onclick={() => handleOnDraw(i, j)}
 			></button>
@@ -105,12 +108,25 @@
 	.cell {
 		all: unset;
 		user-select: none;
-		color: var(--color-fg-3);
 		border: 1px solid var(--color-fg-2-muted);
 	}
 
 	.filled {
 		background-color: var(--color-fg-3);
+	}
+
+	@keyframes colorFade {
+		0% {
+			background-color: var(--color-bg);
+		}
+		100% {
+			background-color: transparent;
+		}
+	}
+
+	.fossil {
+		opacity: 90%;
+		animation: colorFade 15s forwards;
 	}
 
 	.dune-wrapper {
